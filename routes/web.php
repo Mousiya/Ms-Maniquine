@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Livewire\CustomerHomeComponent;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +15,29 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', function () {
     return view('welcome');
+});*/
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });
+
+
+
+Route::get('/redirect',[HomeController::class,'redirect']);
+
+Route::get('/',[HomeController::class,'index']);
+
+Route::get('/logout',[HomeController::class,'logout']);
+
+Route::get('/customer-home-component',CustomerHomeComponent::class);
+
+
