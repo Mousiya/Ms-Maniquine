@@ -35,6 +35,11 @@ class HomeController extends Controller
         
     }
 
+    function dashboard()
+    {
+        return redirect('/customer-home-component');
+    }
+
     function logout()
     {
         Auth::logout();
