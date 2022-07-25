@@ -15,7 +15,16 @@ class CreateWorksTable extends Migration
     {
         Schema::create('works', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->unsignedInteger('likes')->default(0);
+            $table->unsignedInteger('dislikes')->default(0);
+            $table->text('description');
+            $table->string('image')->nullable();
+            $table->text('images')->nullable();
+            $table->bigInteger('category_id')->unsigned()->nullable();
             $table->timestamps();
+            $table->foreign('category_id')->references('id')->on('categories')->onDeleate('cascade');
         });
     }
 

@@ -1,3 +1,4 @@
+<header class="topbar" data-navbarbg="skin5">
 <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin6">
                     <!-- ============================================================== -->
@@ -7,13 +8,13 @@
                         <!-- Logo icon -->
                         <b class="logo-icon">
                             <!-- Dark Logo icon -->
-                            <img src="admin/plugins/images/logo-top-2.png" alt="homepage" />
+                            <img src="{{asset('admin/plugins/images/logo-top-2.png')}}" alt="homepage" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="admin/plugins/images/logo-text-1.png" alt="homepage" />
+                            <img src="{{asset('admin/plugins/images/logo-text-1.png')}}" alt="homepage" />
                         </span>
                     </a>
                     <!-- ============================================================== -->
@@ -58,4 +59,5 @@
                     </ul>
                 </div>
             </nav>
+</header>
         
