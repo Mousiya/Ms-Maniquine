@@ -119,8 +119,8 @@
 						</div>
 						
 						
-						<div class="header-font-style01 center-section">
-							<p>Ms.<b>Maniquine</b></p>
+						<div class="wrap-logo-top center-section" alt="mercado">
+							<img src="assets/images/logo-top-1.png">
                         </div>  
 						 
                         
@@ -148,7 +148,7 @@
 							</div>
 							
 							<div class="wrap-icon-section minicart">
-								<a href="#" class="link-direction">
+								<a href="/cart" class="link-direction">
 									<i class="fa fa-shopping-basket" aria-hidden="true"></i>
 									<div class="left-info">
 										<span class="index">4 items</span>
@@ -173,19 +173,19 @@
 									<a href="/" class="link-term mercado-item-title"><i class="fa fa-home" aria-hidden="true"></i></a>
 								</li>
 								<li class="menu-item">
-									<a href="shop.html" class="link-term mercado-item-title">Shop</a>
+									<a href="/shop" class="link-term mercado-item-title">Shop</a>
 								</li>
 								<li class="menu-item">
-                                    <a href="ourservice.html" class="link-term mercado-item-title">Our Services</a>
+                                    <a href="/ourservice" class="link-term mercado-item-title">Our Services</a>
 								</li>
 								<li class="menu-item">
-									<a href="ourworks.html" class="link-term mercado-item-title">Our Works</a>
+									<a href="/ourworks" class="link-term mercado-item-title">Our Works</a>
 								</li>
 								<li class="menu-item">
-									<a href="contact-us.html" class="link-term mercado-item-title">Contact Us</a>
+									<a href="/contactus" class="link-term mercado-item-title">Contact Us</a>
                                 </li>
 								<li class="menu-item">
-									<a href="about-us.html" class="link-term mercado-item-title">About Us</a>
+									<a href="/aboutus" class="link-term mercado-item-title">About Us</a>
 								</li>																	
 							</ul>
 						</div>
@@ -240,7 +240,7 @@
 			<!--End function info-->
 
 			<div class="main-footer-content">
-
+			
 				<div class="container">
 
 					<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
@@ -370,6 +370,6 @@
 	<script src="{{asset('assets/js/jquery.countdown.min.js')}}"></script>
 	<script src="{{asset('assets/js/jquery.sticky.js')}}"></script>
 	<script src="{{asset('assets/js/functions.js')}}"></script>
-	@livewiresScripts
+	@livewireScripts
 </body>
 </html>

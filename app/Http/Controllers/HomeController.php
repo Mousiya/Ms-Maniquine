@@ -13,7 +13,7 @@ class HomeController extends Controller
 
         if($usertype=='ADM')
         {
-            return view('admin.home');
+            return redirect('/admin-home-component');
         }
         else{
             return redirect('/customer-home-component');
@@ -33,6 +33,11 @@ class HomeController extends Controller
             return redirect('/customer-home-component');
         }
         
+    }
+
+    function dashboard()
+    {
+        return redirect('/customer-home-component');
     }
 
     function logout()
