@@ -1,111 +1,109 @@
-<div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <div class="page-breadcrumb bg-white">
-                <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Product</h4>
-                    </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                        <div class="d-md-flex">
-                            <ol class="breadcrumb ms-auto">
-                                <li><a href="#" class="fw-normal">/ Dashboard / Product</a></li>
-                            </ol>
+<main role="main" class="main-content">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="row">
+            <!-- Striped rows -->
+            <div class="col-md-12 my-4">
+              <h2 class="h4 mb-1">Dresses</h2>
+              <div class="card shadow">
+                <div class="card-body">
+                  <div class="toolbar row mb-3">
+                    <div class="col">
+                      <form class="form-inline">
+                        <div class="form-row">
+                          <div class="form-group col-auto">
+                            <label for="search" class="sr-only" >Search</label>
+                            <input type="text" class="form-control" id="search" value="" placeholder="Search..." wire:model="searchTerm">
+                          </div>
                         </div>
+                      </form>
                     </div>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="white-box">
-                            <div class="row">
-                                <div class="col-sm-9">
-                                    <h3 class="box-title">All Products</h3>
-                                </div>
-                                <div class="col-sm-3">
-                                    <a class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white" href="#">
-                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>    
-                                    Add New Products</a>
-                                </div>
-                            </div>
-                            <!--<p class="text-muted">Add class <code>.table</code></p>-->
-                            <div class="table-responsive">
-                                <table class="table text-nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-top-0">Id</th>
-                                            <th class="border-top-0">Image</th>
-                                            <th class="border-top-0">Product Name</th>
-                                            <th class="border-top-0">Stock</th>
-                                            <th class="border-top-0">Price</th>
-                                            <th class="border-top-0">Category</th>
-                                            <th class="border-top-0">Date</th>
-                                            <th class="border-top-0">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($dresses as $dress)
-                                        <tr>
-                                            <td>{{$dress->id}}</td>
-                                            <td><img src="{{asset('assets/images/products')}}/{{$dress->name}}" width="60"/></td>
-                                            <td>{{$dress->name}}</td>
-                                            <td>{{$dress->stock_status}}</td>
-                                            <td>{{$dress->reqular_price}}</td>
-                                            <td>{{$dress->category->name}}</td>
-                                            <td>{{$dress->created_at}}</td>
-                                            <!--<td>{{$dress->short_description}}</td>
-                                            <td>{{$dress->description}}</td>
-                                            <td>{{$dress->sale_price}}</td>
-                                            <td>{{$dress->SKU}}</td>
-                                            <td>{{$dress->featured}}</td>
-                                            <td>{{$dress->quantity}}</td>
-                                            <td>{{$dress->likes}}</td>
-                                            <td>{{$dress->image}}</td>
-                                            <td>{{$dress->images}}</td>
-                                            <td>{{$dress->images}}</td>
-                                            <td>{{$dress->slug}}</td>-->
-                                            <td></td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    <div class="col ml-auto">
+                      <div class="dropdown float-right">
+                        @if($dresses->count()==0)
+                        <a class="btn btn-primary float-right ml-3" href="{{route('admin.addnewproducts')}}">Add new dresses +</a>
+                        @else
+                        <a class="btn btn-primary float-right ml-3" href="{{route('admin.addproducts')}}">Add Dresses</a>
+                        @endif
+                        <button wire:click.prevent="deleteSelected" class="btn btn-secondary" onclick="confirm('Are you sure, You want to delete this Product?') || event.stopImmediatePropagation()" >Delete</button>
+                      </div>
                     </div>
+                  </div>
+                  <div class="table-responsive">
+                    @if(Session::has('message'))
+                    <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
+                    @endif
+                    <!-- error messages --> 
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                        </ul>
+                    </div>
+                    @endif        
+                    <!-- table -->
+                    <table class="table table-bordered text-nowrap ">
+                      <thead>
+                        <tr>
+                          <th>
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="chkCheckAll" wire:model="selectAll" />
+                              <label class="custom-control-label" for="chkCheckAll"></label>
+                            </div>
+                          </th>
+                          <th>Dress Name</th>
+                         
+                          <th>Description</th>
+                       
+                          <th>Regular price</th>
+                          <th>Sale price</th>
+                          <th>Image</th>
+                          <th>Stock</th>
+                          <th>Date</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach($dresses as $dress)
+                        <tr>
+                          <td>
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="{{$dress->id}}" wire:model="selectedProducts" value="{{$dress->id}}">
+                              <label class="custom-control-label" for="{{$dress->id}}"></label>
+                            </div>
+                          </td>
+                          <td>{{$dress->name}}</td>
+                        
+                          <td>{!!$dress->description!!}</td>
+                          
+                          <td>{{$dress->regular_price}}</td>                                
+                          <td>{{$dress->sale_price}}</td>
+                          <td><img src="{{asset('assets/images/dresses')}}/{{$dress->image}}" width="60" height="40"/></td>
+                          <td>{{$dress->stock_status}}</td>
+                          <td>{{$dress->created_at}}</td>
+                          <td>
+                              <a href="{{route('admin.editproducts',['dress_id'=>$dress->id])}}">
+                              <i class="fe fe-16 fe-edit"></i></a>
+                              <a href="#" onclick="confirm('Are you sure, You want to delete this dress?') || event.stopImmediatePropagation()" wire:click.prevent="deleteProduct({{$dress->id}})" style="margin-left:10px;">
+                              <i class="fe fe-16 fe-trash-2"></i> </a>
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                    @if(count($dresses))
+                      {{$dresses->links('livewire-pagination-link')}}
+                    @endif
+                  </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center"> 2021 © Ample Admin brought to you by <a
-                    href="https://www.wrappixel.com/">wrappixel.com</a>
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-</div>
+              </div><!--end card-->
+            </div> <!-- simple table -->
+          </div> <!-- end section -->
+        </div> <!-- .col-12 -->
+      </div> <!-- .row -->
+    </div> <!-- .container-fluid -->
+</main>

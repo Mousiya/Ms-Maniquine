@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-base-layout>
 <div class="main">
       <div class="shop_top">
 		<div class="container">
@@ -9,7 +9,6 @@
                 </ul>
             </div>
         
-        
             <div class=" main-content-area">
                 <div class="wrap-login-item ">						
                     <div class="login-form form-item form-stl">
@@ -18,7 +17,8 @@
                                 <fieldset class="wrap-title">
                                 <h1 class="form-title">New Customers</h1>
                                 </fieldset>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis</p>
+                                <h4>Welcome!</h4>
+                                    <p>To keep connected with us please <b>Register</b> with your credentials</p>
                                 <a href="{{route('register')}}">
                                     <input type="submit" class="btn btn-submit" name="Submit" value="Create an Account"></a>
                                 <div class="clear"></div>
@@ -57,4 +57,4 @@
 			</div>
 		  </div>
 	  </div>
-</x-guest-layout>
+</x-base-layout>

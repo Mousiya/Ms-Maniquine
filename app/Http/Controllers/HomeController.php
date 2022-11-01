@@ -9,9 +9,10 @@ class HomeController extends Controller
 {
     public function redirect()
     {
+
         $usertype=Auth::user()->utype;
 
-        if($usertype=='ADM')
+        if($usertype==='ADM')
         {
             return redirect('/admin-home-component');
         }

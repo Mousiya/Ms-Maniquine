@@ -68,6 +68,7 @@
 .wrap-product-detail .advance-info .tab-control a.active,
 #review_form_wrapper #review_form .comment-form p.form-submit input[type=submit],
 .wrap-product-detail .detail-info .wrap-butons .add-to-cart:hover,
+.wrap-product-detail .detail-info .wrap-butons .checkout:hover,
 .wrap-product-detail .detail-info .quantity-input .btn:hover,
 .summary-item .btn,
 .choose-payment-methods .payment-method input[type=radio]:checked + span::before,

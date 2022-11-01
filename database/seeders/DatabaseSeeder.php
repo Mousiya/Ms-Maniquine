@@ -23,5 +23,10 @@ class DatabaseSeeder extends Seeder
             'password'=>Hash::make('1234@admin'),
             'remember_token'=>Str::random(10),
         ]);
+
+        $this -> call([CategorySeeder::class]);
+        $this -> call([ServiceCategorySeeder::class]);
+        $this -> call([HomeCategorySeeder::class]);
+        $this -> call([SalesSeeder::class]);
     }
 }

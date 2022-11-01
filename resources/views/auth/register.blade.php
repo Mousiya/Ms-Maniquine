@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-base-layout>
 <main id="main" class="main-site left-sidebar">
 
 <div class="container">
@@ -29,11 +29,7 @@
                                 <label for="frm-reg-email">Email Address*</label>
                                 <input type="email" id="frm-reg-email" name="email" placeholder="Email address":value="email">
                             </fieldset>
-                            <fieldset class="wrap-functions ">
-                                <label class="remember-field">
-                                    <input name="newletter" id="new-letter" value="forever" type="checkbox"><span>Sign Up for Newsletter</span>
-                                </label>
-                            </fieldset>
+                            <input type = "hidden" name="utype" value="USER">
                             <fieldset class="wrap-title">
                                 <h3 class="form-title">Login Information</h3>
                             </fieldset>
@@ -58,4 +54,4 @@
 </div><!--end container-->
 
 </main>
-</x-guest-layout>
+</x-base-layout>
