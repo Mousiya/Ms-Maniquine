@@ -39,7 +39,7 @@
 						<div class="topbar-menu right-menu">
 							<ul>
                                 <li>
-                                @if (Route::has('login'))
+                                @if(Route::has('login'))
                                     	@auth
 										<li class="menu-item menu-item-has-children parent" >
 										<a title="My Account" href="#">My Account ({{Auth::user()->name}})<i class="fa fa-angle-down" aria-hidden="true"></i></a>
@@ -67,6 +67,7 @@
                                             @if (Route::has('register'))
                                                 <li class="menu-item"><a title="Register or Login" href="{{ route('register') }}" >Register</a></li>
                                             @endif
+											
                                         @endauth
                                 @endif
                                 </li>
@@ -77,20 +78,14 @@
 
 				<div class="container">
 					<div class="mid-section main-info-area">
-                       
+						<div class="wrap-logo-top center-section" alt="mercado">
+							<img src="{{asset('assets/images/logo-top-1.png')}}">
+                        </div>  
 						@livewire('shop.header-search-component')
 						
 						<div class="wrap-logo-top center-section">
 							<a href="index.html" class="link-to-home"><img src="{{asset('assets/images/logo-top-2.png')}}" alt="mercado"></a>
 						</div>
-						
-						
-						<div class="wrap-logo-top center-section" alt="mercado">
-							<img src="{{asset('assets/images/logo-top-1.png')}}">
-                        </div>  
-						 
-                        
-						
 
 						<div class="wrap-icon right-section">
 							
@@ -125,16 +120,13 @@
 									<a href="/shop" class="link-term mercado-item-title">Shop</a>
 								</li>
 								<li class="menu-item">
-									<a href="/checkout" class="link-term mercado-item-title">Check out</a>
-								</li>
-								<li class="menu-item">
                                     <a href="{{route('user.ourservices')}}" class="link-term mercado-item-title">Our Services</a>
 								</li>
 								<li class="menu-item">
 									<a href="/ourworks" class="link-term mercado-item-title">Our Works</a>
 								</li>
 								<li class="menu-item">
-									<a href="/contactus" class="link-term mercado-item-title">Contact Us</a>
+									<a href="/contact-us" class="link-term mercado-item-title">Contact Us</a>
                                 </li>
 								<li class="menu-item">
 									<a href="/aboutus" class="link-term mercado-item-title">About Us</a>
@@ -194,23 +186,8 @@
 							<div class="item-content">
 								<div class="wrap-list-item social-network">
 									<ul>
-										<li><a href="#" class="link-to-item" title="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-										<li><a href="#" class="link-to-item" title="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-										<li><a href="#" class="link-to-item" title="pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-										<li><a href="#" class="link-to-item" title="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-						<div class="wrap-footer-item">
-							<h3 class="item-header">Dowload App</h3>
-							<div class="item-content">
-								<div class="wrap-list-item apps-list">
-									<ul>
-										<li><a href="#" class="link-to-item" title="our application on google play store"><figure><img src="{{asset('assets/images/brands/google-play-store.png')}}" alt="google play store" width="128" height="36"></figure></a></li>
+										<li><a href="https://www.facebook.com/Ms.Maniquine" class="link-to-item" title="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+										<li><a href="https://instagram.com/msmaniquine?igshid=YmMyMTA2M2Y=" class="link-to-item" title="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
 									</ul>
 								</div>
 							</div>
@@ -220,31 +197,7 @@
 				</div>
 
 				<div class="wrap-back-link">
-					<div class="container">
-						<div class="back-link-box">
-							<h3 class="backlink-title">Quick Links</h3>
-							<div class="back-link-row">
-
-								<ul class="list-back-link" >
-									<li><span class="row-title">Shop:</span></li>
-									<li><a href="#" class="redirect-back-link" title="Casual wears" >Casual wears</a></li>
-									<li><a href="#" class="redirect-back-link" title="Smart Casual" >Smart Casual</a></li>
-									<li><a href="#" class="redirect-back-link" title="Wedding Dresses" >Wedding Dresses</a></li>
-									<li><a href="#" class="redirect-back-link" title="Party wears" >Party wears</a></li>
-									<li><a href="#" class="redirect-back-link" title="Kid Dresses" >Kid Dresses</a></li>
-								</ul>
-
-                                <ul class="list-back-link" >
-									<li><span class="row-title">Our Services:</span></li>
-                                    <li><a href="#" class="redirect-back-link" title="Aari Work" >Aari Works</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mehendi" >Mehendi</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Saree Blouses" >Saree Blouses</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Lehenga & Anarkali Suit" >Lehenga & Anarkali Suit</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="All ladies wears" >All ladies wears</a></li>
-                                </ul>
-							</div>
-						</div>
-					</div>
+					@livewire('footer-quick-links-component')
 				</div>
 
 			</div>

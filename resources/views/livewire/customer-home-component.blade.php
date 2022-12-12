@@ -7,7 +7,7 @@
 					<div class="item-slide">
 						<img src="{{asset('assets/images/home_sliders')}}/{{$slide->image}}" alt="" class="img-slide">
 						<div class="slide-info slide-1">
-							<h2 class="f-title"><b><i>{!!$slide->title!!}</i></b></h2>
+							<h4 class="f-title"><b><i>{!!$slide->title!!}</i></b></h4>
 							<p><span class="subtitle">{!!$slide->subtitle!!}</span></p>
 							@if($slide->price)
 							<p class="sale-info">Only price: <span class="price">{{$slide->price}}</span></p>
@@ -18,7 +18,7 @@
 					@endforeach
 				</div>
 			</div>
-			
+						
 			<!--BANNER-->
 			<div class="wrap-banner style-twin-default">
 				<div class="banner-item">
@@ -35,8 +35,10 @@
 			<!--On Sale-->
 			@if($ddresses->count()>0 && $sale->status ==1 && $sale->sale_date > Carbon\Carbon::now())
 			<div class="wrap-show-advance-info-box style-1 has-countdown">
-				<h3 class="title-box">Discount </h3>
-				<div class="wrap-countdown mercado-countdown" data-expire="{{Carbon\Carbon::parse($sale->sale_date)->format('Y/m/d h:m:s')}}"></div>
+				<h3 class="title-box" >Discount </h3>
+				<div class="wrap-countdown mercado-countdown" data-expire="{{Carbon\Carbon::parse($sale->sale_date)->format('Y/m/d h:m:s')}}">
+					
+				</div>
 				<div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container " data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}'>
 					@foreach($ddresses as $ddress)
 					<div class="product product-style-2 equal-elem ">
@@ -60,11 +62,6 @@
 			<!--Latest Products-->
 			<div class="wrap-show-advance-info-box style-1">
 				<h3 class="title-box">Latest Products</h3>
-				<div class="wrap-top-banner">
-					<a href="#" class="link-banner banner-effect-2">
-						<figure><img src="assets/images/digital-electronic-banner.jpg" width="1170" height="240" alt=""></figure>
-					</a>
-				</div>
 				<div class="wrap-products">
 					<div class="wrap-product-tab tab-style-1">						
 						<div class="tab-contents">
@@ -79,7 +76,7 @@
 										</div>
 										<div class="product-info">
 											<a href="#" class="product-name"><span>{{$ldress->name}}</span></a>
-											@if($ldress->sale_price>0)
+											@if($ldress->sale_price>0 && $sale->status ==1 && $sale->sale_date > Carbon\Carbon::now())
 											<div class="wrap-price">
 												<span class="product-price">{{$ldress->sale_price}}</span>
 												<span class="product-price regprice">{{$ldress->regular_price}}</span>
@@ -98,14 +95,15 @@
 					</div>
 				</div>
 			</div>
+</br>
 			<!--Product Categories-->
 			<div class="wrap-show-advance-info-box style-1">
 				<h3 class="title-box">Categories</h3>
-				<div class="wrap-top-banner">
+				<!--<div class="wrap-top-banner">
 					<a href="#" class="link-banner banner-effect-2">
 						<figure><img src="assets/images/fashion-accesories-banner.jpg" width="1170" height="240" alt=""></figure>
 					</a>
-				</div>
+				</div>-->
 				<div class="wrap-products">
 					<div class="wrap-product-tab tab-style-1">
 						<div class="tab-control">
@@ -135,7 +133,7 @@
 										</div>
 										<div class="product-info">
 											<a href="#" class="product-name"><span>{{$c_dress->name}}</span></a>
-											@if($c_dress->sale_price>0)
+											@if($c_dress->sale_price>0 && $sale->status ==1 && $sale->sale_date > Carbon\Carbon::now())
 											<div class="wrap-price">
 												<span class="product-price">{{$c_dress->sale_price}}</span>
 												<span class="product-price regprice">{{$c_dress->regular_price}}</span>

@@ -27,7 +27,7 @@ class CategorySeeder extends Seeder
         ]);
 
         Category::create([
-            'name'=>'Kids dress',
+            'name'=>'Kids dresses',
             'image'=>'Kids_dress.jpg',
         ]);
 

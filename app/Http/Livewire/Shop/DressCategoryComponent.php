@@ -91,6 +91,7 @@ class DressCategoryComponent extends Component
             ->where('dress_categories.category_id',$category_id)->paginate($this->pagesize);
         }
         $categories=Category::all();
-        return view('livewire.shop.dress-category-component',['dresses'=> $dresses, 'categories'=>$categories, 'category_name'=>$category_name, 'category_image'=>$category_image])->layout('layouts.base');
+        $popular_dresses = Dress::inRandomOrder()->limit(4)->get();
+        return view('livewire.shop.dress-category-component',['dresses'=> $dresses, 'categories'=>$categories, 'category_name'=>$category_name,'popular_dresses'=>$popular_dresses,'category_image'=>$category_image])->layout('layouts.base');
     }
 }

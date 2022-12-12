@@ -8,7 +8,7 @@
                     <ol class="breadcrumb ms-auto">
                         <li><a href="/" class="fw-normal">/ Dashboard</a> 
                             <a href="{{route('admin.products')}}" class="fw-normal"> / Dresses </a>
-                            <a href="#" class="fw-normal">/ Add New Dresses</a>
+                            <a href="#" class="fw-normal">/ Add Dresses</a>
                         </li>
                     </ol>
                 </div>
@@ -116,38 +116,40 @@
                                   <strong class="card-title">Attributes</strong>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
+                                    <div class="row mb-3">
                                       <div class="col-md-3"><label class="col-form-label" >Colour</label><a class="btn btn-info btn-sm float-right ml-3" href="{{route('admin.colours')}}">Add +</a></div>
                                       <div class="col-md-3"><label class="col-form-label" >Size</label><a class="btn btn-info btn-sm float-right ml-3" href="{{route('admin.sizes')}}">Add +</a></div>
                                       <div class="col-md-3"><label class="col-form-label" >Quantity</label></div>
                                       <div class="col-md-3"><button type="button" class="clone_select2 btn btn-info btn-sm" wire:click.prevent="add">+ Add new</button></div>
                                     </div>
-                                    @foreach($attributes as $key=>$attribute)
+                                    @foreach($dress_sizes as $key=>$attribute)
                                     <table>
-                                    <div class="row">
+                                    <div class="row mb-3">
                                       <div class="col-md-3">
                                         <div  wire:ignore>
-                                        <select class="form-control" name="attributes[{{$key}}][color_id]" wire:model="attributes.{{$key}}.color_id">
+                                        <select class="form-control"  wire:model="dress_sizes.{{$key}}.color_id">
                                           <option>-- select colour --</option>
                                           @foreach($colors as $color)
                                               <option value="{{$color->id}}">{{$color->name}}</option>
                                           @endforeach
                                         </select>
                                         </div>
-                                        @error('attributes.{{$key}}.color_id')<p class="text-danger">{{$message}}</p>@enderror
+                                        @error('dress_sizes.'.$key.'.color_id')<p class="text-danger">{{$message}}</p>@enderror
                                       </div>
                                       <div class="col-md-3">
                                         <div  wire:ignore>
-                                        <select class="form-control" name="attributes[{{$key}}][size_id]"  wire:model="attributes.{{$key}}.size_id">
+                                        <select class="form-control"  wire:model="dress_sizes.{{$key}}.size_id">
                                           <option>-- select size --</option>
                                           @foreach($sizes as $size)
                                               <option value="{{$size->id}}">{{$size->name}}</option>
                                           @endforeach
                                         </select>
                                         </div>
+                                        @error('dress_sizes.'.$key.'.color_id')<p class="text-danger">{{$message}}</p>@enderror
                                       </div>
                                       <div class="col-md-3">
-                                        <input type="number" class="form-control" name="attributes[{{$key}}][qty]" placeholder="quantity" wire:model="attributes.{{$key}}.qty">
+                                        <input type="number" class="form-control" placeholder="quantity" wire:model="dress_sizes.{{$key}}.qty">
+                                        @error('dress_sizes.'.$key.'.qty')<p class="text-danger">{{$message}}</p>@enderror
                                       </div>
                                       <div class="col-md-3">
                                         <button type="button" class="btn btn-danger btn-sm" wire:click.prevent="remove({{$key}})">Remove</button>
@@ -156,7 +158,7 @@
                                     </table>
                                     @endforeach
                                 </div>
-                              </div>
+                            </div>
 
                         </div>
                         </div>

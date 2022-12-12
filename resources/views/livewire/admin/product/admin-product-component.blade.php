@@ -21,11 +21,7 @@
                     </div>
                     <div class="col ml-auto">
                       <div class="dropdown float-right">
-                        @if($dresses->count()==0)
                         <a class="btn btn-primary float-right ml-3" href="{{route('admin.addnewproducts')}}">Add new dresses +</a>
-                        @else
-                        <a class="btn btn-primary float-right ml-3" href="{{route('admin.addproducts')}}">Add Dresses</a>
-                        @endif
                         <button wire:click.prevent="deleteSelected" class="btn btn-secondary" onclick="confirm('Are you sure, You want to delete this Product?') || event.stopImmediatePropagation()" >Delete</button>
                       </div>
                     </div>

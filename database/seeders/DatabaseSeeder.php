@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name'=>'admin',
-            'email'=>'admin@gmail.com',
+            'email'=>'mousiya29@gmail.com',
             'utype'=>'ADM',
             'password'=>Hash::make('1234@admin'),
             'remember_token'=>Str::random(10),

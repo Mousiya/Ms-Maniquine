@@ -34,12 +34,27 @@
                 </div>
                 <div class="detail-info">
                     <div class="product-rating">
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <a href="#" class="count-review">(05 review)</a>
+                        <style>
+                            .color-gray{
+                                color:#e6e6e6 !important;
+                            }    
+                        </style>
+                        @php
+                            $avgrating = 0;
+                        @endphp
+                        @foreach($dress->orderItem->where('rstatus',1) as $orderItem)
+                            @php
+                                $avgrating = $avgrating + $orderItem->review->rating;
+                            @endphp
+                        @endforeach
+                        @for($i=1;$i<=5;$i++)
+                            @if($i<=$avgrating)
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            @else
+                                <i class="fa fa-star color-gray" aria-hidden="true"></i>
+                            @endif
+                        @endfor
+                        <a href="#" class="count-review">({{$dress->orderItem->where('rstatus',1)->count()}} review)</a>
                     </div>
                     <h2 class="product-name">{{$dress->name}}</h2>
                     <div class="short-desc">
@@ -47,8 +62,8 @@
                             {!! $dress->short_description !!}
                         </ul>
                     </div>
-                   
-                    @if($dress->sale_price>0)
+                
+                    @if($dress->sale_price>0 && $sale->status ==1 && $sale->sale_date > Carbon\Carbon::now())
 						<div class="wrap-price">
 							<span class="product-price">{{$dress->sale_price}}</span>
 							<span class="product-price regprice">{{$dress->regular_price}}</span>
@@ -61,6 +76,49 @@
                     <div class="stock-info in-stock">
                         <p class="availability">Availability: <b>{{$dress->stock_status}}</b></p>
                     </div>
+                    <style>
+                        .colorSelectionLabel{
+                            color:#000;
+                            padding:2px 10px;
+                            border:1px solid #000;
+                            border-radius:4px;
+                            font-size:14px;
+                            cursor:pointer;
+                        }
+                        .colorSelectionlabel:active{
+                            background-color:#fff !important;
+                            border:2px solid #000;
+                        }
+                    </style>
+                    <div>
+                        @if($d_colors)    
+                            <div class="row" style="margin-top: 20px ">
+                                <div class="col-xs-2">
+                                    <p>Colour</p>
+                                </div>
+                                <div class="col-xs-10">
+                                    @foreach($d_colors as $d_color)
+                                        <input  type="radio" value="$d_color->color->name" wire:model="sattcolor.{{$d_color->color->code}}" />{{$d_color->color->name}}
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($d_sizes)    
+                            <div class="row" style="margin-top: 20px ">
+                                <div class="col-xs-2">
+                                    <p>Colour</p>
+                                </div>
+                                <div class="col-xs-10">
+                                    @foreach($d_sizes as $d_size)
+                                        <input type="radio" class ="btn btn" value="$d_size->size->name"  wire:model="sattsize.{{$d_size->size->name}}"/>{{$d_size->size->name}}
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+
+                    </div>
+
                     <div class="quantity">
                         <span>Quantity:</span>
 							<div class="quantity-input">
@@ -69,12 +127,17 @@
 								<a class="btn btn-increase" href="#" wire:click.prevent="increaseQuantity"></a>
 							</div>
 					</div>
+                    
 					<div class="wrap-butons">
             			<div class="wrap-btn">
                             <a href="#" class="btn btn-wishlist">Add Wishlist</a>                                
                         </div>
 						<div class="wrap-butons">
-							<a href="#" class="btn add-to-cart" wire:click.prevent="store({{$dress->id}},'{{$dress->name}}',{{$dress->regular_price}})">Add to Cart</a>
+                        @if($dress->sale_price>0 && $sale->status ==1 && $sale->sale_date > Carbon\Carbon::now())
+                            <a href="#" class="btn add-to-cart" wire:click.prevent="store({{$dress->id}},'{{$dress->name}}',{{$dress->sale_price}})">Add to Cart</a>
+                        @else
+                            <a href="#" class="btn add-to-cart" wire:click.prevent="store({{$dress->id}},'{{$dress->name}}',{{$dress->regular_price}})">Add to Cart</a>
+						@endif
 							<a href="#" class="btn checkout">Checkout</a>
 						</div>
 					</div>
@@ -92,76 +155,56 @@
                         <div class="tab-content-item " id="review">
                             
                             <div class="wrap-review-form">
+                                <style>
+                                    .width-0-percent{
+                                        width:0%
+                                    }   
+                                    .width-20-percent{
+                                        width:20%
+                                    }   
+                                    .width-40-percent{
+                                        width:40%
+                                    }   
+                                    .width-60-percent{
+                                        width:60%
+                                    }   
+                                    .width-80-percent{
+                                        width:80%
+                                    }  
+                                    .width-100-percent{
+                                        width:100%
+                                    }     
+                                </style>
                                 
                                 <div id="comments">
-                                    <h2 class="woocommerce-Reviews-title">01 review for <span>Radiant-360 R6 Chainsaw Omnidirectional [Orage]</span></h2>
+                                    <h2 class="woocommerce-Reviews-title">{{$dress->orderItem->where('rstatus',1)->count()}} review for <span>{{$dress->name}}</span></h2>
                                     <ol class="commentlist">
+                                        @foreach($dress->orderItem->where('rstatus',1) as $orderItem)
                                         <li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-20">
                                             <div id="comment-20" class="comment_container"> 
-                                                <img alt="" src="{{ asset('assets/images/author-avata.jpg')}}" height="80" width="80">
+                                                @if($orderItem->order->user->profile->image)
+                                                <img alt="{{$orderItem->order->user->name}}" src="{{asset('assets/images/profiles')}}/{{$orderItem->order->user->profile->image}}"height="80" width="80">
+                                                @else
+                                                <img alt="" src="{{ asset('assets/images/profiles/profile.png')}}" height="80" width="80">
+                                                @endif
                                                 <div class="comment-text">
                                                     <div class="star-rating">
-                                                        <span class="width-80-percent">Rated <strong class="rating">5</strong> out of 5</span>
+                                                        <span class="width-{{ $orderItem->review->rating * 20 }}-percent">Rated <strong class="rating">{{ $orderItem->review->rating}}</strong> out of 5</span>
                                                     </div>
                                                     <p class="meta"> 
-                                                        <strong class="woocommerce-review__author">admin</strong> 
+                                                        <strong class="woocommerce-review__author">{{$orderItem->order->user->name}}</strong> 
                                                         <span class="woocommerce-review__dash">–</span>
-                                                        <time class="woocommerce-review__published-date" datetime="2008-02-14 20:00" >Tue, Aug 15,  2017</time>
+                                                        <time class="woocommerce-review__published-date" datetime="2008-02-14 20:00" >{{Carbon\Carbon::parse($orderItem->review->created_at)->format('d F Y g:i A')}}</time>
                                                     </p>
                                                     <div class="description">
-                                                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                                                        <p>{{$orderItem->review->comment}}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </li>
+                                        @endforeach
                                     </ol>
                                 </div><!-- #comments -->
-
-                                <div id="review_form_wrapper">
-                                    <div id="review_form">
-                                        <div id="respond" class="comment-respond"> 
-
-                                            <form action="#" method="post" id="commentform" class="comment-form" novalidate="">
-                                                <p class="comment-notes">
-                                                    <span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span>
-                                                </p>
-                                                <div class="comment-form-rating">
-                                                    <span>Your rating</span>
-                                                    <p class="stars">
-                                                        
-                                                        <label for="rated-1"></label>
-                                                        <input type="radio" id="rated-1" name="rating" value="1">
-                                                        <label for="rated-2"></label>
-                                                        <input type="radio" id="rated-2" name="rating" value="2">
-                                                        <label for="rated-3"></label>
-                                                        <input type="radio" id="rated-3" name="rating" value="3">
-                                                        <label for="rated-4"></label>
-                                                        <input type="radio" id="rated-4" name="rating" value="4">
-                                                        <label for="rated-5"></label>
-                                                        <input type="radio" id="rated-5" name="rating" value="5" checked="checked">
-                                                    </p>
-                                                </div>
-                                                <p class="comment-form-author">
-                                                    <label for="author">Name <span class="required">*</span></label> 
-                                                    <input id="author" name="author" type="text" value="">
-                                                </p>
-                                                <p class="comment-form-email">
-                                                    <label for="email">Email <span class="required">*</span></label> 
-                                                    <input id="email" name="email" type="email" value="" >
-                                                </p>
-                                                <p class="comment-form-comment">
-                                                    <label for="comment">Your review <span class="required">*</span>
-                                                    </label>
-                                                    <textarea id="comment" name="comment" cols="45" rows="8"></textarea>
-                                                </p>
-                                                <p class="form-submit">
-                                                    <input name="submit" type="submit" id="submit" class="submit" value="Submit">
-                                                </p>
-                                            </form>
-
-                                        </div><!-- .comment-respond-->
-                                    </div><!-- #review_form -->
-                                </div><!-- #review_form_wrapper -->
 
                             </div>
                         </div>
@@ -186,7 +229,7 @@
                                 </div>
                                 <div class="product-info">
                                     <a href="{{route('dress.details',['dress_id'=>$dress->id])}}" class="product-name"><span>{{$d_dress->name}}</span></a>
-                                    @if($d_dress->sale_price>0)
+                                    @if($dress->sale_price>0 && $sale->status ==1 && $sale->sale_date > Carbon\Carbon::now())
 									<div class="wrap-price">
 									    <span class="product-price">{{$d_dress->sale_price}}</span>
 									    <span class="product-price regprice">{{$d_dress->regular_price}}</span>
@@ -225,7 +268,7 @@
                             </div>
                             <div class="product-info">
                                 <a href="{{route('dress.details',['dress_id'=>$r_dress->id])}}" class="product-name"><span>{{$r_dress->name}}</span></a>
-                                @if($r_dress->sale_price>0)
+                                @if($dress->sale_price>0 && $sale->status ==1 && $sale->sale_date > Carbon\Carbon::now())
 								<div class="wrap-price">
 				    				<span class="product-price">{{$r_dress->sale_price}}</span>
 									<span class="product-price regprice">{{$r_dress->regular_price}}</span>

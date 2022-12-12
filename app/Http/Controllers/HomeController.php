@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Route;
 
 class HomeController extends Controller
 {
     public function redirect()
     {
-
         $usertype=Auth::user()->utype;
 
         if($usertype==='ADM')
@@ -19,6 +19,7 @@ class HomeController extends Controller
         else{
             return redirect('/customer-home-component');
         }
+
 
     }
 

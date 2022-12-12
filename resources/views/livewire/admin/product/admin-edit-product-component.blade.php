@@ -109,7 +109,7 @@
                                     @endif
                                     @error('newsizechart')<p class="text-danger">{{$message}}</p>@enderror
                                 </div>
-                                <div class="col-sm-8">
+                                <div class="form-group col-sm-8">
                                   <label class="col-sm-3 col-form-label">Stock Status</label>
                                   <div class="col-sm-9">
                                     <div class="row">
@@ -130,6 +130,56 @@
                                 </div>
                               </div>
                             </div>
+
+                            <div class="card shadow mb-4 col-12">
+                                <div class="card-header">
+                                  <strong class="card-title">Attributes</strong>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                      <div class="col-md-3"><label class="col-form-label" >Colour</label><a class="btn btn-info btn-sm float-right ml-3" href="{{route('admin.colours')}}">Add +</a></div>
+                                      <div class="col-md-3"><label class="col-form-label" >Size</label><a class="btn btn-info btn-sm float-right ml-3" href="{{route('admin.sizes')}}">Add +</a></div>
+                                      <div class="col-md-3"><label class="col-form-label" >Quantity</label></div>
+                                      <div class="col-md-3"><button type="button" class="clone_select2 btn btn-info btn-sm" wire:click.prevent="add">+ Add new</button></div>
+                                    </div>
+                                    @foreach($dress_sizes as $key=>$attribute)
+                                    <table>
+                                    <div class="row">
+                                      <div class="col-md-3">
+                                        <div  wire:ignore>
+                                        <select class="form-control"  wire:model="dress_sizes.{{$key}}.color_id">
+                                          <option>-- select colour --</option>
+                                          @foreach($colors as $color)
+                                              <option value="{{$color->id}}">{{$color->name}}</option>
+                                          @endforeach
+                                        </select>
+                                        </div>
+                                        @error('dress_sizes.'.$key.'.color_id')<p class="text-danger">{{$message}}</p>@enderror
+                                      </div>
+                                      <div class="col-md-3">
+                                        <div  wire:ignore>
+                                        <select class="form-control"  wire:model="dress_sizes.{{$key}}.size_id">
+                                          <option>-- select size --</option>
+                                          @foreach($sizes as $size)
+                                              <option value="{{$size->id}}">{{$size->name}}</option>
+                                          @endforeach
+                                        </select>
+                                        </div>
+                                        @error('dress_sizes.'.$key.'.color_id')<p class="text-danger">{{$message}}</p>@enderror
+                                      </div>
+                                      <div class="col-md-3">
+                                        <input type="number" class="form-control" placeholder="quantity" wire:model="dress_sizes.{{$key}}.qty">
+                                        @error('dress_sizes.'.$key.'.qty')<p class="text-danger">{{$message}}</p>@enderror
+                                      </div>
+                                      <div class="col-md-3">
+                                        <button type="button" class="btn btn-danger btn-sm" wire:click.prevent="remove({{$key}})">Remove</button>
+                                      </div>
+                                    </div>
+                                    </table>
+                                    @endforeach
+                                </div>
+                            </div>
+                            
                         </div>
                       </div>
                       @if(Session::has('message'))

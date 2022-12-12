@@ -70,69 +70,21 @@
 
 				<div class="container">
 					<div class="mid-section main-info-area">
-                       
-						<div class="wrap-search left-section">
-							<div class="wrap-search-form">
-								<form action="#" id="form-search-top" name="form-search-top">
-									<input type="text" name="search" value="" placeholder="Search here...">
-									<button form="form-search-top" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-									<div class="wrap-list-cate">
-										<input type="hidden" name="product-cate" value="0" id="product-cate">
-										<a href="#" class="link-control">All Collections</a>
-										<ul class="list-cate">
-											<li class="level-0">All Collections</li>
-											<li class="level-1">-Casual wears</li>
-											<li class="level-2">Skirt</li>
-											<li class="level-2">Blouses</li>
-											<li class="level-2">Tops</li>
-                                            <li class="level-2">Frokes</li>
-                                            <li class="level-2">kids dresses</li>
-											<li class="level-1">-Smart Casual</li>
-                                            <li class="level-2">Skirt</li>
-											<li class="level-2">Blouses</li>
-											<li class="level-2">Tops</li>
-											<li class="level-2">kids dresses</li>
-											<li class="level-1">-Wedding Dresses</li>
-											<li class="level-2">Lehenga & Anarkali Suit</li>
-											<li class="level-1">-Party wears</li>
-											<li class="level-2">Frocks</li>
-											<li class="level-2">Tops</li>
-											<li class="level-2">kid dresses</li>
-                                            <li class="level-1">-kid Dresses</li>
-											<li class="level-2">party frocks</li>
-											<li class="level-2">frocks</li>
-											<li class="level-2"></li>
-										</ul>
-									</div>
-								</form>
-							</div>
-						</div>
+						<div class="wrap-logo-top center-section" alt="mercado">
+							<img src="{{asset('assets/images/logo-top-1.png')}}">
+                        </div>  
+						@livewire('shop.header-search-component')
 						
 						<div class="wrap-logo-top center-section">
 							<a href="index.html" class="link-to-home"><img src="{{asset('assets/images/logo-top-2.png')}}" alt="mercado"></a>
 						</div>
-						
-						
-						<div class="wrap-logo-top center-section" alt="mercado">
-							<img src="{{asset('assets/images/logo-top-1.png')}}">
-                        </div>  
-						 
-                        
-						
 
 						<div class="wrap-icon right-section">
 							
+							@livewire('wishlist-count-component')
 							
-							<div class="wrap-icon-section wishlist">
-								<a href="#" class="link-direction">
-									<i class="fa fa-heart" aria-hidden="true"></i>
-									<div class="left-info">
-										<span class="index">0 item</span>
-										<span class="title">Wishlist</span>
-									</div>
-								</a>
-							</div>
-							
+							@livewire('cart-count-component')
+
 							<div class="wrap-icon-section show-up-after-1024">
 								<a href="#" class="mobile-navigation">
 									<span></span>
@@ -141,24 +93,9 @@
 								</a>
 							</div>
 							
-							<div class="wrap-icon-section minicart">
-								<a href="{{route('dress.cart')}}" class="link-direction">
-									<i class="fa fa-shopping-basket" aria-hidden="true"></i>
-									<div class="left-info">
-										@if(Cart::count()>0)
-										<span class="index">{{Cart::count()}} item(s)</span>
-										@endif
-										<span class="title">CART</span>
-									</div>
-								</a>
-							</div>
-							
-						</div>
-
-                        
+						</div>           
 					</div>
 				</div>
-
 				
 				<div class="nav-section header-sticky">
                     
@@ -178,7 +115,7 @@
 									<a href="/ourworks" class="link-term mercado-item-title">Our Works</a>
 								</li>
 								<li class="menu-item">
-									<a href="/contactus" class="link-term mercado-item-title">Contact Us</a>
+									<a href="/contact-us" class="link-term mercado-item-title">Contact Us</a>
                                 </li>
 								<li class="menu-item">
 									<a href="/aboutus" class="link-term mercado-item-title">About Us</a>
@@ -238,10 +175,8 @@
 							<div class="item-content">
 								<div class="wrap-list-item social-network">
 									<ul>
-										<li><a href="#" class="link-to-item" title="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-										<li><a href="#" class="link-to-item" title="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-										<li><a href="#" class="link-to-item" title="pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-										<li><a href="#" class="link-to-item" title="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+										<li><a href="https://www.facebook.com/Ms.Maniquine" class="link-to-item" title="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+										<li><a href="https://instagram.com/msmaniquine?igshid=YmMyMTA2M2Y=" class="link-to-item" title="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
 									</ul>
 								</div>
 							</div>

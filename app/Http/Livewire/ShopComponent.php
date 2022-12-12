@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Dress;
 use Livewire\withPagination;
 use Cart;
+use App\Models\Sale;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 
@@ -14,7 +15,6 @@ class ShopComponent extends Component
 {
     public $sorting;
     public $pagesize;
-
     
     public function mount()
     {
@@ -52,30 +52,38 @@ class ShopComponent extends Component
     use withPagination;
     public function render()
     {
+
         if($this->sorting=='date')
         {
             $dresses =Dress::orderBy('created_at','DESC')->paginate($this->pagesize);
         }
         else if($this->sorting=='price')
-        {
-            $dresses =Dress::orderBy('regular_price','ASC')->paginate($this->pagesize);
+        {   if($dress->sale_price>0 && $sale->status ==1 && $sale->sale_date > Carbon\Carbon::now())
+                $dresses =Dress::orderBy('sale_price','ASC')->paginate($this->pagesize);
+            else
+                $dresses =Dress::orderBy('regular_price','ASC')->paginate($this->pagesize);
         }
         else if($this->sorting=='price-desc')
         {
-            $dresses =Dress::orderBy('regular_price','DESC')->paginate($this->pagesize);
+            if($dress->sale_price>0 && $sale->status ==1 && $sale->sale_date > Carbon\Carbon::now())
+                $dresses =Dress::orderBy('sale_price','DESC')->paginate($this->pagesize);
+            else
+                $dresses =Dress::orderBy('regular_price','DESC')->paginate($this->pagesize);
         }
         else
         {
-            $dresses =Dress::paginate($this->pagesize);
+            $dresses =Dress::orderBy('created_at','ASC')->paginate($this->pagesize);
         }
+
         $categories=Category::all();
 
         if(Auth::check())
         {
             Cart::instance('cart')->store(Auth::user()->email);
         }
-
+        
+        $sale=sale::find(1);
         $popular_dresses = Dress::inRandomOrder()->limit(4)->get();
-        return view('livewire.shop-component',['dresses'=> $dresses, 'categories'=>$categories , 'popular_dresses'=>$popular_dresses])->layout('layouts.base');
+        return view('livewire.shop-component',['dresses'=> $dresses, 'categories'=>$categories , 'popular_dresses'=>$popular_dresses, 'sale'=>$sale])->layout('layouts.base');
     }
 }

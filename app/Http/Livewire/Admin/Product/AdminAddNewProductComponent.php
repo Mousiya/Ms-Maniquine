@@ -29,32 +29,36 @@ class AdminAddNewProductComponent extends Component
     public $category_ids;
     public $selected_categories=[];
 
-    public $attributes=[];
-    public $inputs=[];
+    public $dress_sizes;
     public $color;
-    public $selected_colors=[];
     public $size;
-    public $selected_sizes=[];
-    public $selected_quantity=[];
+    
+    public $dress_id;
+    public $color_id;
+    public $size_id;
+    public $qty;
+
+    protected $rules=[
+        'dress_sizes.*.color_id'=>'required',
+        'dress_sizes.*.size_id'=>'required',
+        'dress_sizes.*.qty'=>'required'
+    ];
 
     public function mount()
     {
         $this->stock_status='instock';
-        $this->attributes=[
-            ['color_id'=>'','size_id'=>'','qty'=>1]
-        ];
+        $dress_id=$this->dress_id;
+        $dress= Dress::where('id',$dress_id)->first();
+       
+        $this->dress_sizes=DressSize::all()->where('dress_id',$dress_id);
+        
     }
 
     public function add()
     {
-        $this->attributes[]=['color_id'=>'','size_id'=>'','qty'=>1];
+        $this->dress_sizes->push(new DressSize());
     }
 
-    public function remove($key)
-    {
-        unset($this->attributes[$key]);
-        array_values($this->attributes);
-    }
 
 
     public function render()
@@ -74,11 +78,22 @@ class AdminAddNewProductComponent extends Component
             'stock_status'=>'required',
             'image'=>'required',
             'selected_categories'=>'required',
+           
         ],
         [
             'unique'=> 'this category is already exit'
         ]
     );
+    }
+
+    public function remove($key)
+    {
+        $dress_size=$this->dress_sizes[$key];
+        $this->dress_sizes->forget($key);
+
+        $dress_size->delete();
+
+        session()->flash('success','The data has been deleted successfully.');
     }
 
     public function addProduct()
@@ -94,7 +109,7 @@ class AdminAddNewProductComponent extends Component
         [
             'unique'=> 'this category is already exit'
         ]
-    );
+        );
         $dress = new Dress();
         $dress->name = $this->name;
         $dress->short_description = $this->short_description;
@@ -132,6 +147,11 @@ class AdminAddNewProductComponent extends Component
             $dcategory->dress_id=$dress->id;
             $dcategory->category_id=$cats;
             $dcategory->save();
+        }
+
+        foreach($this->dress_sizes as $dress_size){
+            $dress_size->dress_id=$dress->id;
+            $dress_size->save();
         }
 
         

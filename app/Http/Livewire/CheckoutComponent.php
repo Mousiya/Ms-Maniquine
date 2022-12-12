@@ -48,8 +48,6 @@ class CheckoutComponent extends Component
         $this->province = $user->profile->province;
         $this->city = $user->profile->city;
 
-        
-
     }
     public function updated($fields)
     {
@@ -171,8 +169,11 @@ class CheckoutComponent extends Component
         }
 
         $this->thankyou =1;
+        
         Cart::instance('cart')->destroy();
         session()->forget('checkout');
+        return redirect()->route('thankyou');
+
 
     }
 
@@ -190,6 +191,7 @@ class CheckoutComponent extends Component
         {
             return redirect()->route('product.cart');
         }
+
     }
     
     public function render()

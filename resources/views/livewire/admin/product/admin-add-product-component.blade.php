@@ -44,33 +44,12 @@
                             @foreach($dresses as $dress)
                               <option value="{{$dress->id}}">{{$dress->name}}</option>
                             @endforeach
-                            <optgroup label="Alaskan/Hawaiian Time Zone">
-                              <option value="AK">Alaska</option>
-                              <option value="HI">Hawaii</option>
-                            </optgroup>
-                            <optgroup label="Pacific Time Zone">
-                              <option value="CA">California</option>
-                              <option value="NV" disabled="disabled">Nevada (disabled)</option>
-                              <option value="OR">Oregon</option>
-                              <option value="WA">Washington</option>
-                            </optgroup>
                           </select>
                           </div>
                           <div class="col-md-3">
                               <a class="btn btn-primary" href="{{route('admin.addnewproducts')}}">Add new dresses +</a>
                           </div>
                           </div>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="simpleinput">Category Name</label>
-                            <input type="text" id="simpleinput" class="form-control" placeholder="category" wire:model="name">
-                        </div>
-                        <div class="form-group mb-3">
-                          <label for="example-fileinput">Category Image</label>
-                          <input type="file" id="example-fileinput" class="form-control-file" wire:model="image">
-                            @if($image)
-                                <img src="{{$image->temporaryUrl()}}" width="120" height="40"/>
-                            @endif
                         </div>
                     </div> <!-- /.col -->
                     </div>

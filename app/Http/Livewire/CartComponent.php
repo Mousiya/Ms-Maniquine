@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 use Livewire\Component;
+use App\Models\Sale;
 use App\Models\Coupon;
 use Carbon\Carbon;
 use Cart;
@@ -165,6 +166,8 @@ class CartComponent extends Component
             Cart::instance('cart')->store(Auth::user()->email);
         }
 
-        return view('livewire.cart-component')->layout('layouts.base');
+        $sale=Sale::find(1);
+
+        return view('livewire.cart-component',['sale'=>$sale])->layout('layouts.base');
     }
 }

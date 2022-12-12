@@ -15,7 +15,10 @@ use App\Http\Livewire\WishlistComponent;
 use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\ThankyouComponent;
 use App\Http\Livewire\OurserviceComponent;
+
 use App\Http\Livewire\OurworksComponent;
+use App\Http\Livewire\Work\WorkCategoryComponent;
+
 use App\Http\Livewire\AboutusComponent;
 use App\Http\Livewire\ContactusComponent;
 
@@ -34,6 +37,7 @@ use App\Http\Livewire\Admin\Service\AdminViewServiceComponent;
 use App\Http\Livewire\Admin\Product\AdminProductComponent;
 use App\Http\Livewire\Admin\Product\AdminAddNewProductComponent;
 use App\Http\Livewire\Admin\Product\AdminAddProductComponent;
+use App\Http\Livewire\Admin\Product\ProductAddDetailComponent;
 use App\Http\Livewire\Admin\Product\AdminEditProductComponent;
 
 use App\Http\Livewire\Admin\Product\Colour\AdminColourComponent;
@@ -61,6 +65,9 @@ use App\Http\Livewire\Admin\AdminSaleComponent;
 use App\Http\Livewire\Admin\Coupon\AdminCouponsComponent;
 use App\Http\Livewire\Admin\Coupon\AdminAddCouponComponent;
 use App\Http\Livewire\Admin\Coupon\AdminEditCouponComponent;
+
+use App\Http\Livewire\Admin\UserReviewComponent;
+use App\Http\Livewire\Admin\CustomerDetailComponent;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -93,7 +100,6 @@ Route::get('/', function () {
     return view('welcome');
 });*/
 
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -104,12 +110,25 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/',[HomeController::class,'index']);
+//for User
+Route::middleware(['auth:sanctum','verified'])->group(function(){
+
+});
+
+//for Admin
+Route::middleware(['auth:sanctum','verified'])->group(function(){
+
+});
+
+
+
 Route::get('/redirect',[HomeController::class,'redirect']);
+
+Route::get('/',[HomeController::class,'index']);
 
 Route::get('/logout',[HomeController::class,'logout']);
 
-Route::get('/customer-home-component',CustomerHomeComponent::class);
+Route::get('/customer-home-component',CustomerHomeComponent::class)->name('customer.dashboard');
 Route::get('/admin-home-component',AdminHomeComponent::class)->name('admin.dashboard');
 Route::get('/CustomerHome',[HomeController::class,'dashboard']);
 
@@ -127,8 +146,11 @@ Route::get('/checkout',CheckoutComponent::class)->name('checkout');
 Route::get('/thankyou',ThankyouComponent::class)->name('thankyou');
 
 Route::get('/ourservice',OurserviceComponent::class)->name('user.ourservices');
+
 Route::get('/ourworks',OurworksComponent::class);
-Route::get('/contactus',ContactusComponent::class);
+Route::get('/work-category/{category_id}',WorkCategoryComponent::class)->name('work.categories');
+
+Route::get('/contact-us',ContactusComponent::class)->name('work.contact');
 Route::get('/aboutus',AboutusComponent::class);
 Route::get('/admin/categories',AdminCategoryComponent::class)->name('admin.categories');
 Route::post('/admin/categories',AdminCategoryComponent::class)->name('admin.categories');
@@ -153,6 +175,10 @@ Route::get('/admin/product/size',AdminSizeComponent::class)->name('admin.sizes')
 Route::get('/admin/product/size/add',AdminAddSizeComponent::class)->name('admin.addsizes');
 Route::get('/admin/product/size/edit/{size_id}',AdminEditSizeComponent::class)->name('admin.editsizes');
 
+Route::get('/admin/customer-reviews',UserReviewComponent::class)->name('admin.reviews');
+
+Route::get('/admin/customer-details',CustomerDetailComponent::class)->name('admin.customers');
+
 
 Route::get('/admin/ourworks',AdminWorkComponent::class)->name('admin.ourworks');
 Route::get('/admin/ourworks/add',AdminAddWorksComponent::class)->name('admin.addourworks');
@@ -173,15 +199,6 @@ Route::get('/admin/coupons/add',AdminAddCouponComponent::class)->name('admin.add
 Route::get('/admin/coupons/edit/{coupon_id}',AdminEditCouponComponent::class)->name('admin.editcoupon');
 
 
-
-
-
-
-
-
-
-
-
 Route::get('/customer/dashboard',CustomerDashboardComponent::class)->name('customer.dashboard');
 Route::get('/customer/myprofile',CustomerProfileComponent::class)->name('customer.myprofile');
 Route::get('/customer/editprofile',CustomerEditProfileComponent::class)->name('customer.editprofile');
@@ -189,4 +206,5 @@ Route::get('/customer/myorders',CustomerOrdersComponent::class)->name('customer.
 Route::get('/customer/orders/{order_id}',CustomerOrderdetailsComponent::class)->name('customer.orderdetails');
 Route::get('/customer/mypayment',CustomerPaymentComponent::class)->name('customer.mypayment');
 Route::get('/customer/mywishlist',CustomerWishlistComponent::class)->name('customer.mywishlist');
-Route::get('/customer/myreviews',CustomerReviewComponent::class)->name('customer.myreviews');
+Route::get('/customer/myreview/{order_item_id}',CustomerReviewComponent::class)->name('customer.myreviews');
+

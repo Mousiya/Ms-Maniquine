@@ -129,8 +129,6 @@
                       </div>
                       <button type="submit" class="btn btn-primary">Add</button>
                   </from>
-                  <a class="btn btn-secondary" href="{{route('admin.addproducts')}}"> 
-                    Add product +</a>
                     <a class="btn btn-secondary" href="{{route('admin.addnewproducts')}}"> 
                     Add new product +</a>
                     </div> <!-- .card-body -->

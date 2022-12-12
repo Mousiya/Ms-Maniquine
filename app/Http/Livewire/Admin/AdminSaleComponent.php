@@ -35,7 +35,7 @@ class AdminSaleComponent extends Component
         $sale->sale_date=$this->sale_date;
         $sale->status = $this->status;
         $sale->save();
-        session()->flash('message','Home category has been created successfully!');
+        session()->flash('message','Offer has been activated successfully!');
     }
 
     public function render()

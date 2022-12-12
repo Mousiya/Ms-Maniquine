@@ -14,6 +14,7 @@ class CreateDressSizesTable extends Migration
     public function up()
     {
         Schema::create('dress_sizes', function (Blueprint $table) {
+            $table->id();
             $table->bigInteger('dress_id')->unsigned();
             $table->bigInteger('color_id')->unsigned()->nullable();
             $table->bigInteger('size_id')->unsigned()->nullable();

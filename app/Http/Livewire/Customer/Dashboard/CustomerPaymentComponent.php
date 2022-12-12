@@ -8,6 +8,6 @@ class CustomerPaymentComponent extends Component
 {
     public function render()
     {
-        return view('livewire.customer.dashboard.customer-payment-component');
+        return view('livewire.customer.dashboard.customer-payment-component')->layout('layouts.base');
     }
 }

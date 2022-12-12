@@ -56,21 +56,24 @@
                             <div class="product-thumnail">
                                 <a href="{{route('dress.details',['dress_id'=>$dress->id])}}" title="{{$dress->name}}">
                                 <figure><img class="dress-image" src="{{asset('assets/images/dresses')}}/{{$dress->image}}" alt="{{$dress->name}}"></figure>
-                            </a>
+                                </a>
                             </div>
                             <div class="product-info">
                                 <a href="{{route('dress.details',['dress_id'=>$dress->id])}}"class="product-name"><span>{{$dress->name}}</span></a>
-                                @if($dress->sale_price>0)
+                                @if($dress->sale_price>0 && $sale->status ==1 && $sale->sale_date > Carbon\Carbon::now())
                                 <div class="wrap-price">
                                     <span class="product-price">{{$dress->sale_price}}</span>
                                     <span class="product-price regprice">{{$dress->regular_price}}</span>
                                 </div>
+                                <a href="#" class="btn add-to-cart" wire:click.prevent="store({{$dress->id}},'{{$dress->name}}',{{$dress->sale_price}})">Add To Cart</a>
                                 @else
                                 <div class="wrap-price">
                                     <span class="product-price">{{$dress->regular_price}}</span>
                                 </div>
-                                @endif
+
                                 <a href="#" class="btn add-to-cart" wire:click.prevent="store({{$dress->id}},'{{$dress->name}}',{{$dress->regular_price}})">Add To Cart</a>
+                                @endif
+                                
                                 <div class="product-wish">
                                     @if($wishitems->contains($dress->id))
                                         <a href="#" wire:click.prevent="removeFromWishlist({{$dress->id}})"><i class="fa fa-heart fill-heart"></i></a>
@@ -103,45 +106,6 @@
                 </div>
             </div><!-- Categories widget-->
 
-            <div class="widget mercado-widget filter-widget price-filter">
-                <h2 class="widget-title">Price</h2>
-                <div class="widget-content">
-                    <div id="slider-range"></div>
-                    <p>
-                        <label for="amount">Price:</label>
-                        <input type="text" id="amount" readonly>
-                        <button class="filter-submit">Filter</button>
-                    </p>
-                </div>
-            </div><!-- Price-->
-
-            <div class="widget mercado-widget filter-widget">
-                <h2 class="widget-title">Color</h2>
-                <div class="widget-content">
-                    <ul class="list-style vertical-list has-count-index">
-                        <li class="list-item"><a class="filter-link " href="#">Red <span>(217)</span></a></li>
-                        <li class="list-item"><a class="filter-link " href="#">Yellow <span>(179)</span></a></li>
-                        <li class="list-item"><a class="filter-link " href="#">Black <span>(79)</span></a></li>
-                        <li class="list-item"><a class="filter-link " href="#">Blue <span>(283)</span></a></li>
-                        <li class="list-item"><a class="filter-link " href="#">Grey <span>(116)</span></a></li>
-                        <li class="list-item"><a class="filter-link " href="#">Pink <span>(29)</span></a></li>
-                    </ul>
-                </div>
-            </div><!-- Color -->
-
-            <div class="widget mercado-widget filter-widget">
-                <h2 class="widget-title">Size</h2>
-                <div class="widget-content">
-                    <ul class="list-style inline-round ">
-                        <li class="list-item"><a class="filter-link active" href="#">s</a></li>
-                        <li class="list-item"><a class="filter-link " href="#">M</a></li>
-                        <li class="list-item"><a class="filter-link " href="#">l</a></li>
-                        <li class="list-item"><a class="filter-link " href="#">xl</a></li>
-                    </ul>
-                   
-                </div>
-            </div><!-- Size -->
-
             <div class="widget mercado-widget widget-product">
                 <h2 class="widget-title">Popular Products</h2>
                 <div class="widget-content">
@@ -156,7 +120,7 @@
                                 </div>
                                 <div class="product-info">
                                     <a href="{{route('dress.details',['dress_id'=>$dress->id])}}" class="product-name"><span>{{$d_dress->name}}</span></a>
-                                    @if($d_dress->sale_price>0)
+                                    @if($d_dress->sale_price>0 && $sale->status ==1 && $sale->sale_date > Carbon\Carbon::now())
 									<div class="wrap-price">
 									    <span class="product-price">{{$d_dress->sale_price}}</span>
 									    <span class="product-price regprice">{{$d_dress->regular_price}}</span>
@@ -170,7 +134,6 @@
                             </div>
                         </li>
                         @endforeach
-
                     </ul>
                 </div>
             </div><!-- brand widget-->

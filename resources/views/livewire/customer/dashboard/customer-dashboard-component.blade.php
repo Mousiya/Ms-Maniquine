@@ -36,8 +36,7 @@
 						<li class="list-group-item {{(request()->route()->getName()=='myprofile')?'active':''}}"><a href="{{route('customer.myprofile')}}">My Profile </a></li>
 						<li class="list-group-item {{(request()->route()->getName()=='mypayment')?'active':''}}"><a href="{{route('customer.mypayment')}}">My Payment</a></li>
 						<li class="list-group-item {{(request()->route()->getName()=='myorders')?'active':''}}"><a href="{{route('customer.myorders')}}">My Orders </a></li>
-						<li class="list-group-item {{(request()->route()->getName()=='myreviews')?'active':''}}"><a href="{{route('customer.myreviews')}}">My Reviews</a></li>
-						<li class="list-group-item {{(request()->route()->getName()=='mywishlist')?'active':''}}"><a href="{{route('customer.mywishlist')}}">My Wishlist</a></li>
+						<li class="list-group-item {{(request()->route()->getName()=='mywishlist')?'active':''}}"><a href="{{route('dress.wishlist')}}">My Wishlist</a></li>
            
 						<li class="list-group-item {{(request()->route()->getName()=='Logout')?'active':''}}">
               <a href="{{route('logout') }}"onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
@@ -84,8 +83,27 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Address :</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                    {{$user->profile->address}}
+                    <div class="col-sm-8 text-secondary">
+                    @if($user->profile->line1!=null)
+                      <div>
+                      {{$user->profile->line1}},
+                      </div>
+                    @endif
+                    @if($user->profile->line2!=null)
+                    <div>
+                    {{$user->profile->line2}},
+                    </div>
+                    @endif
+                    @if($user->profile->city!=null)
+                    <div>
+                    {{$user->profile->city}},
+                    </div>
+                    @endif
+                    @if($user->profile->province!=null)
+                    <div>
+                    {{$user->profile->province}}.
+                    </div>
+                    @endif
                     </div>
                   </div>
                   <hr>
@@ -135,7 +153,7 @@
                                 <td>{{$order->email}}</td>
                                 <td>{{$order->status}}</td>
                                 <td>{{$order->created_at}}</td>
-                                <td><a class="btn btn-info btn-sm" href="{{route('customer.orderdetails',['order_id'=>$orders->id])}}">Details</a></td>
+                                <td><a class="btn btn-info btn-sm" href="{{route('customer.orderdetails',['order_id'=>$order->id])}}"> Details</a></td>
                               </tr>
                               @endforeach
                               @else
@@ -149,7 +167,7 @@
                               @endif
                             </tbody>
                           </table>
-                          
+                          {{$orders->links()}}
                       </div>
                     </div>
                   </div>

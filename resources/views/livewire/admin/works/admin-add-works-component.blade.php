@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="image-gallery">Dress Gallery</label>
+                            <label for="image-gallery">Gallery</label>
                             <input type="file" id="image-gallery" class="form-control-file" wire:model="images" multiple>
                                 @if($images)
                                 @foreach($images as $image)

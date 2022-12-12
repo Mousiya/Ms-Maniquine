@@ -20,10 +20,20 @@
                         <div class="card-body">  
                             <form enctype="multipart/form-data" wire:submit.prevent="updateSale">           
                                 <div class="form-group mb-3">
-                                    <label for="sale">Date Range</label>
-                                    <input type="text" id="sale-date" class="form-control" wire:model="sale_date">
+                                    <label for="sale">End Date</label>
+                                    <input type="datetime-local"class="form-control" id="datetime" wire:model="sale_date">
                                     @error('sale_date')<p class="text-danger">{{$message}}</p>@enderror
                                 </div>
+                                <p id="datetimejs"></p>
+                                <script>
+                                    var today = new Date();
+                                    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                                    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                                    var dateTime = date+' '+time;
+            
+                                    //console.log(dateTime);
+                                    document.getElementById("datetimejs").innerHTML = dateTime;
+                                </script>
                                 <div class="form-group mb-3">
                                     <label>Status</label>
                                         <div class="row">
@@ -67,15 +77,5 @@
     </div> <!-- .container-fluid -->
 </main>
 @push('scripts')
-   <script>
-   $(function(){
-        $('#sale-date').datetimepicker({
-            format:'Y-MM-DD h:m:s',
-        })
-        .on('dp.change',function(ev){
-            var data = $('#sale-date').val();
-            @this.set('sale_date',data);
-        });
-   });
-   </script>
+<script src="{{asset('admin/js/datetimeadd.js')}}"></script>
 @endpush

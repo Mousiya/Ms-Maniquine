@@ -78,10 +78,10 @@
                       <h6 class="mb-0">Address :</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        <input type="text area" class="form-control" placeholder="line1" wire:model="line1">
-                        <input type="text area" class="form-control" placeholder="line2" wire:model="line2">
-                        <input type="text" class="form-control" placeholder="city" wire:model="city">
-                        <input type="text" class="form-control" placeholder="province" wire:model="province">
+                        <input type="text area" class="form-control mb-3" placeholder="line1" wire:model="line1">
+                        <input type="text area" class="form-control mb-3" placeholder="line2" wire:model="line2">
+                        <input type="text" class="form-control mb-3" placeholder="city" wire:model="city">
+                        <input type="text" class="form-control mb-3" placeholder="province" wire:model="province">
                     </div>
                   </div>
                   <hr>

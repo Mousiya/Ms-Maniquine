@@ -17,7 +17,7 @@
        
             <h2>Thank you for your order</h2>
             <p>A confirmation email was sent.</p>
-            <a href="/" class="btn btn-submit btn-submitx">Continue Shopping</a>
+            <a href="/shop" class="btn btn-submit btn-submitx">Continue Shopping</a>
         </div>
     </div>
 </div>

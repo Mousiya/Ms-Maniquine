@@ -53,7 +53,7 @@ class ServiceCategorySeeder extends Seeder
         ]);
 
         ServiceCategory::create([
-            'name'=>'Kid Dresses',
+            'name'=>'Kids Dresses',
             'description'=>'Every little girl is a princess design dresses for 
                 your baby girl with Ms.Maniquine.Happy children are always the 
                 pretiest when you dressing up with Ms.Maniquine.Stay classy!',
@@ -61,7 +61,7 @@ class ServiceCategorySeeder extends Seeder
         ]);
 
         ServiceCategory::create([
-            'name'=>'Party wear',
+            'name'=>'Party wears',
             'description'=>'Fashion is a language that creates itself in clothes to interrupt reality.
                 You can wear a pretty dresses on party days which are perfectly fit on
                 your body. We’ll design for you. Choose your unique party wear with Ms.Maniquine.',

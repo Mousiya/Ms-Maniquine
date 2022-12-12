@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Shop;
 use App\Models\Dress;
+use App\Models\DressSize;
 use App\Models\Sale;
 use App\Models\DressCategory;
 use Livewire\Component;
@@ -12,18 +13,29 @@ class DressDetailComponent extends Component
 {
     public $dress_id;
     public $selected_categories=[];
+    public $qty;
+    public $sattsize=[]; 
+    public $sattcolor=[];
 
     public function mount($dress_id)
     {
         $dress= Dress::where('id',$dress_id)->first();
         $this->dress_id=$dress_id;
         $this->selected_categories = explode(',',$dress->category_ids);
-        $this->qty = 1;
+        $this->qty=1;
     }
 
     public function store($dress_id,$dress_name, $dress_price)
     {
-        Cart::instance('cart')->add($dress_id,$dress_name,$this->qty, $dress_price)->associate('App\Models\Dress');
+
+        $attributes=Cart::instance('cart')->add([
+            'id'=>$dress_id,
+            'name'=>$dress_name,
+            'qty'=>$this->qty,
+            'price'=>$dress_price,
+            'options'=>["dress_size"=>$this->sattsize,"dress_color"=>$this->sattcolor]
+        ]);
+        Cart::associate($attributes->rowId, 'App\Models\Dress');
         session()->flash('success_message','Item added in cart');
         return redirect()->route('dress.cart');
     }
@@ -40,13 +52,15 @@ class DressDetailComponent extends Component
             $this->qty--;
         }
     }
-
+    
     public function render()
     {
         $dress = Dress::where('id',$this->dress_id)->first();
         $cdress=DressCategory::where('dress_id',$this->dress_id)->first();
         $popular_dresses = Dress::inRandomOrder()->limit(4)->get();
-        
+        //$d_colors =DB::table('dress_sizes')->select('color_id')->distinct()->where('dress_id',$this->dress_id)->get();
+        $d_colors =DressSize::select('color_id')->distinct()->where('dress_id',$this->dress_id)->get();
+        $d_sizes =DressSize::select('size_id')->distinct()->where('dress_id',$this->dress_id)->get();
         $d_cats = explode(',',$dress->category_ids);
         foreach($d_cats as $cats)
         {
@@ -58,7 +72,7 @@ class DressDetailComponent extends Component
         }
         //$related_dresses = Dress::where('category_id',$dress->category_id)->inRandomOrder()->limit(5)->get();
         $sale=Sale::find(1);
-        return view('livewire.shop.dress-detail-component',['dress'=>$dress,'popular_dresses'=>$popular_dresses,'related_dresses'=>$related_dresses,'sale'=>$sale])->layout('layouts.base');
+        return view('livewire.shop.dress-detail-component',['dress'=>$dress,'popular_dresses'=>$popular_dresses,'related_dresses'=>$related_dresses,'sale'=>$sale,'d_colors'=>$d_colors,'d_sizes'=>$d_sizes])->layout('layouts.base');
     }
     
 }

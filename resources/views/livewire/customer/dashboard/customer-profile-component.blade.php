@@ -70,18 +70,26 @@
                       <h6 class="mb-0">Address :</h6>
                     </div>
                     <div class="col-sm-8 text-secondary">
-                    <div>
-                    {{$user->profile->line1}},
-                    </div>
+                    @if($user->profile->line1!=null)
+                      <div>
+                      {{$user->profile->line1}},
+                      </div>
+                    @endif
+                    @if($user->profile->line2!=null)
                     <div>
                     {{$user->profile->line2}},
                     </div>
+                    @endif
+                    @if($user->profile->city!=null)
                     <div>
                     {{$user->profile->city}},
                     </div>
+                    @endif
+                    @if($user->profile->province!=null)
                     <div>
                     {{$user->profile->province}}.
                     </div>
+                    @endif
                     </div>
                   </div>
                   <hr>

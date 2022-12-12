@@ -45,7 +45,7 @@
                     <strong class="card-title">Ordered Item(s)</strong>
                     </div>
                     <div class="card-body"> 
-                        <div class="wrap-iten-in-cart">
+                        <div class="wrap-item-in-cart">
                             <h3 class="box-title">Products Name</h3>
                             <ul class="products-cart">
                                 @foreach($order->orderDetail as $item)

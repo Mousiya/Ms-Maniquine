@@ -30,9 +30,6 @@
                                 <input type="email" id="frm-reg-email" name="email" placeholder="Email address":value="email">
                             </fieldset>
                             <input type = "hidden" name="utype" value="USER">
-                            <fieldset class="wrap-title">
-                                <h3 class="form-title">Login Information</h3>
-                            </fieldset>
                             <fieldset class="wrap-input item-width-in-half left-item ">
                                 <label for="frm-reg-pass">Password *</label>
                                 <input type="password" id="frm-reg-pass" name="password" placeholder="Password" required autocomplete="new.password">
@@ -41,8 +38,6 @@
                                 <label for="frm-reg-cfpass">Confirm Password *</label>
                                 <input type="password" id="frm-reg-cfpass" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new.password">
                             </fieldset>
-                            <input type="hidden" name="phoneno" value="null">
-                            <input type="hidden" name="address" value="null">
                             <input type="submit" class="btn btn-sign" value="Register" name="register">
                         </form>
                     </div>											

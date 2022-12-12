@@ -88,13 +88,13 @@
               </a>
             </li>
             <li class="nav-item w-100">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{route('admin.reviews')}}">
                 <i class="fe fe-pen-tool fe-16"></i>
                 <span class="ml-3 item-text">Reviews</span>
               </a>
             </li>
             <li class="nav-item w-100">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{route('admin.customers')}}">
                 <i class="fe fe-users fe-16"></i>
                 <span class="ml-3 item-text">Customers</span>
               </a>
